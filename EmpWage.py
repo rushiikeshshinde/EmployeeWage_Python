@@ -1,23 +1,23 @@
 import random
 
-def check_attendance(attendance):
-    
-    match attendance:
-        case 0:
-            return 0
-        
-        case 1:
-            time = input("Enter a type of job (part/full) :").lower()
+def monthly_wage():
+    wage = 0
+    working_days = 30
 
-            match time:                
-                case "part":
-                    return 20 * 6
-                
-                case "full":
-                    return 20 * 8
-                
-                case _:
-                    return "Invalid job type"
+    job_type = input("Enter the type of job (part/full): ").strip().lower()
 
-attendance_check=random.randint(0,1)
-print(f"The wage is: {check_attendance(attendance_check)}")
+    if job_type not in ["part", "full"]:
+        print("Invalid job type. Please enter either 'part' or 'full'.")
+        return 0
+
+    hourly_rate = 20
+    hours_per_day = 6 if job_type == "part" else 8
+
+    for _ in range(working_days):
+        attendance = random.randint(0, 1)
+        if attendance == 1:
+            wage += hourly_rate * hours_per_day
+
+    return wage
+
+print(f"Total monthly wage: {monthly_wage()}")
